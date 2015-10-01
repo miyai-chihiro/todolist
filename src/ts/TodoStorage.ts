@@ -4,8 +4,8 @@ module todos {
     'use strict';
 
     /**
-     * Services that persists and retrieves TODOs from localStorage.
-     */
+     *      * Services that persists and retrieves TODOs from localStorage.
+     *           */
     export class TodoStorage implements ITodoStorage {
 
         STORAGE_ID = 'todos-angularjs-typescript';

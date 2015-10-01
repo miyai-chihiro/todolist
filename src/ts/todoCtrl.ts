@@ -1,4 +1,4 @@
-///<reference path='_all.ts' />
+/// <reference path='_all.ts' />
 
 module todos {
 
@@ -9,24 +9,28 @@ module todos {
         public static $inject = [
             '$scope',
             '$location',
-            'filterFilter'
+            'filterFilter',
+            'todoStorage'
         ];
         constructor(
             private $scope: ITodoScope,
             private $location: ng.ILocationService,
-            private filterFilter
-            ){
-                this.todos = $scope.todos = [
-                    {
-                        title: 'test001',
-                        completed: false
-                    },
-                    {
-                        title: 'test002',
-                        completed: true
-                    }
-                ];
-
+            private filterFilter,
+            private todoStorage:ITodoStorage
+        ){
+                //this.todos = $scope.todos = [
+                //    {
+                //        title: 'test001',
+                //        completed: false
+                //    },
+                //    {
+                //        title: 'test002',
+                //        completed: true
+                //    }
+                //];
+                
+                $scope.todos = this.todos = todoStorage.get();
+console.log($scope.todos);
                 $scope.newTodo = '';
                 $scope.editTodo = null;
                 $scope.vm = this;
@@ -38,10 +42,11 @@ module todos {
 
         }
         onPath(path:string) {
-            this.$scope.statusFilter = (path === '/active') ? {completed:false} : (path === 'completed')? {completed: true} : null;
+            this.$scope.statusFilter = (path === '/active') ? {completed:false} : (path === '/completed')? {completed: true} : null;
 
         }
         onTodos() {
+            this.todoStorage.put(this.todos);
             this.$scope.remainingCount = this.filterFilter(this.todos,{completed: false}).length;
             this.$scope.allChecked = !this.$scope.remainingCount;
         }
