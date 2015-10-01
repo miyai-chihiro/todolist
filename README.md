@@ -1,2 +1,2 @@
-# todolist
-tastejs/todomvc を真似して実装中
+# develop
+開発環境テンプレート

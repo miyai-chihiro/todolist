@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todomvc">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO LIST</title>
+    <style>
+        .edit {
+            display: none;
+        }
+        .editing .edit {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="todoCtr">
+        <ul>
+            <li ng-repeat="todo in todos | filter:statusFilter" ng-class="{editing: todo == editTodo} ">
+                <input type="checkbox" ng-model="todo.completed">
+                <label ng-dblclick="vm.editTodo(todo)">{{todo.title}}</label>
+                <button ng-click="vm.removeTodo(todo)">削除</button>
+                <form ng-submit="vm.doneEditTodo(todo)">
+                    <input type="text" class="edit" ng-model="todo.title">
+                </form>
+            </li>
+        </ul>
+        <input type="text" placeholder="add new todo" ng-model="newTodo">
+        <button ng-click="vm.addTodo()">add new todo</button>
+        <div>
+            <button ng-click="vm.checkAll()">markAll</button>
+            <ul>
+                <li><a href="#/">All</a></li>
+                <li><a href="#/active">active</a></li>
+                <li><a href="#/completed">completed</a></li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/base.js"></script>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
