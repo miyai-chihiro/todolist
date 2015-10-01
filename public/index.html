@@ -27,7 +27,7 @@
         <input type="text" placeholder="add new todo" ng-model="newTodo">
         <button ng-click="vm.addTodo()">add new todo</button>
         <div>
-            <button ng-click="vm.checkAll()">markAll</button>
+            <button ng-click="vm.checkAll(!allChecked)">markAll</button>
             <ul>
                 <li><a href="#/">All</a></li>
                 <li><a href="#/active">active</a></li>

@@ -38,12 +38,12 @@ module todos {
 
         }
         onPath(path:string) {
-            console.log(path);
             this.$scope.statusFilter = (path === '/active') ? {completed:false} : (path === 'completed')? {completed: true} : null;
 
         }
         onTodos() {
             this.$scope.remainingCount = this.filterFilter(this.todos,{completed: false}).length;
+            this.$scope.allChecked = !this.$scope.remainingCount;
         }
         addTodo() {
             var newTodo:string = this.$scope.newTodo.trim();
@@ -67,10 +67,9 @@ module todos {
                 this.removeTodo(todo);
             }
         }
-        checkAll() {
+        checkAll(allChecked: boolean) {
             this.$scope.todos.forEach(todo =>{ 
-                console.log(todo);
-                todo.completed = true;
+                todo.completed = allChecked;
             });
         }
     }
